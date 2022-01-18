@@ -1,8 +1,10 @@
 // req.query - multifaceted, often combining multiple parameters.
 // req.param - specific to a single property, often intended to retrieve a single record.
-
-const { query } = require('express');
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
+const { animals } = require('./data/animals');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -52,18 +54,41 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 };
 
-// Takes in the id and array of animals and returns a single animal object,
+// Takes in the id and array of animals and returns a single animal object.
 function findById(id, animalsArray) {
     const result = animalsArray.filter(animal => animal.id === id)[0];
     return result;
 };
 
 function createNewAnimal(body, animalsArray) {
-    console.log(body);
-    // our function's main code will go here!
-
+    const animal = body;
+    animalsArray.push(animal);
+    fs.writeFileSync(
+        // '__dirname' - represents the directory of the file we execute the code in.
+        path.join(__dirname, './data/animals.json'),
+        // 'JSON.stringify' - Converts the JavaScript array data as JSON.
+        // 'null' - means we don't want to edit any of our existing data; if we did, we could pass something in there.
+        // '2' - Indicates we want to create white space between our values to make it more readable.
+        JSON.stringify({ animals: animalsArray }, null, 2)
+    );
     // return finished code to post route for response
-    return body;
+    return animal;
+};
+
+function validateAnimal(animal) {
+    if (!animal.name || typeof animal.name !== 'string') {
+        return false;
+    }
+    if (!animal.species || typeof animal.species !== 'string') {
+        return false;
+    }
+    if (!animal.diet || typeof animal.diet !== 'string') {
+        return false;
+    }
+    if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
+        return false;
+    }
+    return true;
 };
 
 // The get() method requires two arguments. 
@@ -73,7 +98,7 @@ app.get('/api/animals', (req, res) => {
     let results = animals;
     if (req.query) {
         results = filterByQuery(req.query, results);
-    };
+    }
     res.json(results);
 });
 
@@ -91,15 +116,22 @@ app.get('/api/animals/:id', (req, res) => {
 // A route that listens for POST request/ 
 app.post('/api/animals', (req, res) => {
     // req.body is where out incoming content will be
-    console.log(req.body);
-    res.json(req.body);
+    // set id based on what the next index of the array will be
+    req.body.id = animals.length.toString();
+
+    // add animal to json file and animals array in this function
+    if (!validateAnimal(req.body)) {
+        res.status(400).send('The animal is not properly formatted.');
+    }
+    else {
+        const animal = createNewAnimal(req.body, animals);
+        res.json(animal);
+    }
 });
 
 // The app.listen() method returns an http.Server object 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });
-
-const { animals } = require('./data/animals');
 
 // Stop the previous server by entering 'Ctrl+c'
