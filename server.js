@@ -6,6 +6,13 @@ const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Parse incoming string or array data
+// Takes incoming POST data and converts it to key/value pairings that can be accessed in the req.body object.
+// {extended: true} - informs our server that there may be sub-array data nested in it as well, so it needs to look as deep into the POST data as possible to parse all of the data correctly.
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
+
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
     // Note that we save the animalArray as filteredResults here:
