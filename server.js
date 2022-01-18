@@ -58,6 +58,14 @@ function findById(id, animalsArray) {
     return result;
 };
 
+function createNewAnimal(body, animalsArray) {
+    console.log(body);
+    // our function's main code will go here!
+
+    // return finished code to post route for response
+    return body;
+};
+
 // The get() method requires two arguments. 
 // 1. './api/animals' - A string that describes the route the client will have to fetch from.
 // 2. (req, res) - A callback function that will execute every time that route is accessed with a GET request.
