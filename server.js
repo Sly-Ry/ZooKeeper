@@ -131,6 +131,11 @@ app.get('/zookeepers', (req, res) => {
     res.sendFile(path.join(__dirname, './public/zookeepers.html'));
 });
 
+// '*' -  Act as a "wildcard", meaning any route that wasn't previously defined will fall under this request and will receive the homepage as the response [thus, requests for '/about' or '/contact' or '/membership' will essentially be the same now.
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 // A route that listens for POST request/ 
 app.post('/api/animals', (req, res) => {
     // req.body is where out incoming content will be
