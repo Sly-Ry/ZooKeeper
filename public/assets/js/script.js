@@ -25,7 +25,31 @@ const handleAnimalFormSubmit = event => {
     personalityTraits.push(selectedTraits[i].value);
   }
   const animalObject = { name, species, diet, personalityTraits };
+  
 
+  fetch('/api/animals', {
+    // method: 'POST' - Specifies what type of request it is. 
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    // We can add stringified JSON data for our animalObject to the 'body' property of the request, otherwise we would never receive 'req.body'.
+    body: JSON.stringify(animalObject)
+    
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    alert('Error: ' + response.statusText);
+  })
+  .then(postResponse => {
+    console.log(postResponse);
+    alert('Thank you fo adding an animal!');
+  })
 };
+
+
 
 $animalForm.addEventListener('submit', handleAnimalFormSubmit);

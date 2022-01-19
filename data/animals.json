@@ -123,6 +123,24 @@
     },
     {
       "id": "13"
+    },
+    {
+      "name": "Unkle Funkle",
+      "species": "Koala",
+      "diet": "folivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "14"
+    },
+    {
+      "name": "Unkle Funkle",
+      "species": "Koala",
+      "diet": "folivore",
+      "personalityTraits": [
+        "zany"
+      ],
+      "id": "15"
     }
   ]
 }

@@ -14,6 +14,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+app.use(express.static('public'));
 
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
@@ -127,6 +128,12 @@ app.post('/api/animals', (req, res) => {
         const animal = createNewAnimal(req.body, animals);
         res.json(animal);
     }
+});
+
+// "/" - Brings us to the root route of the server! 
+// This GET route has just one job to do, and that is to respond with an HTML page to display in the browser.
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // The app.listen() method returns an http.Server object 
