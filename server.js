@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { animals } = require('./data/animals');
+const { allowedNodeEnvironmentFlags } = require('process');
+const res = require('express/lib/response');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -114,6 +116,21 @@ app.get('/api/animals/:id', (req, res) => {
     }
 });
 
+// "/" - Brings us to the root route of the server! 
+// This GET route has just one job to do, and that is to respond with an HTML page to display in the browser.
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// '/aniumals' - an endpoint that we've labeled to serve an HTML page. (professional system to differentiate api paths such as adding '/api' or not based on usage).
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
 // A route that listens for POST request/ 
 app.post('/api/animals', (req, res) => {
     // req.body is where out incoming content will be
@@ -130,11 +147,6 @@ app.post('/api/animals', (req, res) => {
     }
 });
 
-// "/" - Brings us to the root route of the server! 
-// This GET route has just one job to do, and that is to respond with an HTML page to display in the browser.
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
 
 // The app.listen() method returns an http.Server object 
 app.listen(PORT, () => {
