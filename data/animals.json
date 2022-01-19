@@ -150,6 +150,24 @@
         "anxious"
       ],
       "id": "16"
+    },
+    {
+      "name": "Unkle Funkle",
+      "species": "Koala",
+      "diet": "folivore",
+      "personalityTraits": [
+        "zany"
+      ],
+      "id": "17"
+    },
+    {
+      "name": "Unkle Funkle",
+      "species": "Koala",
+      "diet": "folivore",
+      "personalityTraits": [
+        "zany"
+      ],
+      "id": "18"
     }
   ]
 }

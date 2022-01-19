@@ -22,17 +22,32 @@ const printResults = resultArr => {
   $displayArea.innerHTML = animalHTML.join('');
 };
 
+// This function is actually capable of making two types of requests (it will depend on how the queryUrl ends up looking).
+// If nothing is passed into formData = the request will be simply GET /api/animals.
 const getAnimals = (formData = {}) => {
   let queryUrl = '/api/animals?';
 
+  //  (3) From there, the object formData will be passed through the 'Object.entries()' method to create query parameters.
   Object.entries(formData).forEach(([key, value]) => {
     queryUrl += `${key}=${value}&`;
   });
 
   console.log(queryUrl);
 
+  fetch(queryUrl)
+    .then(response => {
+      if(!response.ok) {
+        return alert('Error: ' + response.statusText);
+      }
+      return response.json()
+    })
+    .then(animalData => {
+      console.log(animalData);
+      printResults(animalData);
+    });
 };
 
+// (1) This function will gather all of the form input data and package it as an object...
 const handleGetAnimalsSubmit = event => {
   event.preventDefault();
   const dietRadioHTML = $animalForm.querySelectorAll('[name="diet"]');
@@ -58,7 +73,7 @@ const handleGetAnimalsSubmit = event => {
   const personalityTraits = personalityTraitArr.join(',');
 
   const animalObject = { diet, personalityTraits };
-
+  // (2)...and send to the 'getAnimals()' function as the formData argument.
   getAnimals(animalObject);
 };
 
