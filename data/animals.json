@@ -117,57 +117,6 @@
         "hungry"
       ],
       "id": "11"
-    },
-    {
-      "id": "12"
-    },
-    {
-      "id": "13"
-    },
-    {
-      "name": "Unkle Funkle",
-      "species": "Koala",
-      "diet": "folivore",
-      "personalityTraits": [
-        "hungry"
-      ],
-      "id": "14"
-    },
-    {
-      "name": "Unkle Funkle",
-      "species": "Koala",
-      "diet": "folivore",
-      "personalityTraits": [
-        "zany"
-      ],
-      "id": "15"
-    },
-    {
-      "name": "Unkle Funkle",
-      "species": "Koala",
-      "diet": "folivore",
-      "personalityTraits": [
-        "anxious"
-      ],
-      "id": "16"
-    },
-    {
-      "name": "Unkle Funkle",
-      "species": "Koala",
-      "diet": "folivore",
-      "personalityTraits": [
-        "zany"
-      ],
-      "id": "17"
-    },
-    {
-      "name": "Unkle Funkle",
-      "species": "Koala",
-      "diet": "folivore",
-      "personalityTraits": [
-        "zany"
-      ],
-      "id": "18"
     }
   ]
 }
