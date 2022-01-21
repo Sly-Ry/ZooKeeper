@@ -15,7 +15,6 @@ router.get('/animals', (req, res) => {
 router.get('/zookeepers', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/zookeepers.html'));
 });
-  
 
 // '*' -  Act as a "wildcard", meaning any route that wasn't previously defined will fall under this request and will receive the homepage as the response [thus, requests for '/about' or '/contact' or '/membership' will essentially be the same now.
 router.get('*', (req,res) => {

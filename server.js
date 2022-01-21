@@ -1,11 +1,11 @@
 // req.query - multifaceted, often combining multiple parameters.
 // req.param - specific to a single property, often intended to retrieve a single record.
 const express = require('express');
-const apiRoutes = require('./routes/apiRoutes');
-const htmlRoutes = require('./routes/htmlRoutes');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+const apiRoutes = require('./routes/apiRoutes');
+const htmlRoutes = require('./routes/htmlRoutes');
 
 // Parse incoming string or array data
 // Takes incoming POST data and converts it to key/value pairings that can be accessed in the req.body object.
